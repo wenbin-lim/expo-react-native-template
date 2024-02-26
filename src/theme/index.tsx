@@ -9,10 +9,10 @@ const theme = {
     secondary: "#14b8a6",
     secondaryText: "#fff",
 
-    tertiary: "#afc0e3",
+    tertiary: "#ec4899",
     tertiaryText: "#000",
 
-    error: "#ec4899",
+    error: "#dc2626",
     errorText: "#ffffff",
 
     border: "#9ca3af",
