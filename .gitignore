@@ -33,3 +33,11 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# eas
+# eas.json
+
+# build files
+*.aab
+*.apk
+*.ipa
