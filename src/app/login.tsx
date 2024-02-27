@@ -21,8 +21,8 @@ const LoginScreen = () => {
   const form = useForm<LoginProps>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
-      username: "00000002",
-      password: "wenbin",
+      username: "",
+      password: "",
     },
   });
 
