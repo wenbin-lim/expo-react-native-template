@@ -1,14 +1,13 @@
 import { Stack } from "expo-router";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { useAuth } from "@src/providers/auth";
 import { format } from "date-fns";
 
-import { Feather } from "@expo/vector-icons";
-
+import { StackHeader } from "@src/components";
 import theme from "@src/theme";
 
 const SecretScreen = () => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
 
   const formatDateToString = (date: string) => {
     if (!date) return "-";
@@ -21,11 +20,7 @@ const SecretScreen = () => {
       <Stack.Screen
         options={{
           title: "Membership Page",
-          headerRight: () => (
-            <TouchableOpacity onPress={logout}>
-              <Feather name="log-out" size={24} color="black" />
-            </TouchableOpacity>
-          ),
+          headerRight: () => <StackHeader title="Membership Page" />,
         }}
       />
 
