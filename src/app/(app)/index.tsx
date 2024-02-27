@@ -1,13 +1,35 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+
+import { useGetPrivileges } from "@src/api/privileges";
 
 import theme from "@src/theme";
 
-type Props = {};
+const Privileges = () => {
+  const { data, error, isLoading } = useGetPrivileges();
 
-const Privileges = (props: Props) => {
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <Text>An error occured. Please try again later!</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Privileges</Text>
+      {data?.map((privilege) => (
+        <View key={privilege.id} style={styles.card}>
+          <Text>{privilege.name}</Text>
+        </View>
+      ))}
     </View>
   );
 };
@@ -21,4 +43,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: theme.padding.containerX,
     rowGap: 8,
   },
+  card: {},
 });
