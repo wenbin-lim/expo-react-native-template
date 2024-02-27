@@ -32,7 +32,7 @@ const LoginScreen = () => {
       await login({ username, password });
       setLoggingIn(false);
     } catch (error) {
-      console.log(error);
+      console.log("Error onLogin", error);
     }
   };
 
