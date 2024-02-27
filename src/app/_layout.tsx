@@ -11,6 +11,8 @@ import {
 
 // Providers
 import { AuthProvider } from "@src/providers/auth";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+const queryClient = new QueryClient();
 
 const RootLayout = () => {
   const [fontsLoaded, fontError] = useFonts({
@@ -26,9 +28,11 @@ const RootLayout = () => {
 
   return (
     <SafeAreaProvider>
-      <AuthProvider>
-        <Slot />
-      </AuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <Slot />
+        </AuthProvider>
+      </QueryClientProvider>
     </SafeAreaProvider>
   );
 };
