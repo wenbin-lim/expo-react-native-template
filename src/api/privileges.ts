@@ -21,7 +21,12 @@ export const getPrivileges = async () => {
       .collection<Privilege>(PRIVILEGES_KEY)
       .getFullList();
 
-    return data;
+    const dataWithFullImage = data.map((privilege) => ({
+      ...privilege,
+      image: backend.files.getUrl(privilege, privilege.image),
+    }));
+
+    return dataWithFullImage;
   } catch (error) {
     console.log("Error getting privileges", error);
     throw error;

@@ -1,7 +1,14 @@
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+} from "react-native";
+import { format } from "date-fns";
 
 import { useGetPrivileges } from "@src/api/privileges";
-
+import { Image } from "expo-image";
 import theme from "@src/theme";
 
 const Privileges = () => {
@@ -23,14 +30,40 @@ const Privileges = () => {
     );
   }
 
+  const formatDateToString = (date: string) => {
+    if (!date) return "-";
+
+    return format(new Date(date), "dd/MM/yyyy");
+  };
+
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       {data?.map((privilege) => (
         <View key={privilege.id} style={styles.card}>
-          <Text>{privilege.name}</Text>
+          <Image
+            style={styles.cardImage}
+            source={{
+              uri: privilege.image,
+            }}
+            contentFit="cover"
+          />
+
+          <View style={styles.cardContent}>
+            <Text style={styles.cardContentTitle}>{privilege.name}</Text>
+            <Text style={styles.cardContentText}>
+              {privilege.short_description}
+            </Text>
+            <Text style={styles.cardContentText}>
+              {privilege.points} Points
+            </Text>
+            <Text style={styles.cardContentDates}>
+              {formatDateToString(privilege.start_date)} to{" "}
+              {formatDateToString(privilege.end_date)}
+            </Text>
+          </View>
         </View>
       ))}
-    </View>
+    </ScrollView>
   );
 };
 
@@ -41,7 +74,36 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: theme.padding.containerY,
     paddingHorizontal: theme.padding.containerX,
-    rowGap: 8,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 16,
   },
-  card: {},
+  card: {
+    flex: 1,
+    flexBasis: "40%",
+    backgroundColor: theme.colors.surface,
+    borderRadius: 8,
+    overflow: "hidden",
+  },
+  cardImage: {
+    width: "100%",
+    height: 100,
+  },
+  cardContent: {
+    paddingHorizontal: 8,
+    paddingVertical: 12,
+    gap: 4,
+  },
+  cardContentTitle: {
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  cardContentText: {
+    fontSize: 12,
+    opacity: 0.8,
+  },
+  cardContentDates: {
+    fontSize: 10,
+    opacity: 0.6,
+  },
 });
