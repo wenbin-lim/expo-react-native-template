@@ -84,6 +84,7 @@ const LoginScreen = () => {
             style={styles.textInput}
             onChangeText={onChange}
             value={value}
+            secureTextEntry
           />
         )}
       />
