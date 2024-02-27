@@ -1,6 +1,5 @@
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { StyleSheet } from "react-native";
-import { Stack } from "expo-router";
+import { Slot } from "expo-router";
 
 // fonts
 import {
@@ -10,7 +9,8 @@ import {
   Roboto_700Bold,
 } from "@expo-google-fonts/roboto";
 
-import theme from "@src/theme";
+// Providers
+import { AuthProvider } from "@src/providers/auth";
 
 const RootLayout = () => {
   const [fontsLoaded, fontError] = useFonts({
@@ -26,19 +26,11 @@ const RootLayout = () => {
 
   return (
     <SafeAreaProvider>
-      <Stack
-        // base screen options
-        screenOptions={{
-          headerBackTitleVisible: false,
-          contentStyle: {
-            backgroundColor: theme.colors.background,
-          },
-        }}
-      />
+      <AuthProvider>
+        <Slot />
+      </AuthProvider>
     </SafeAreaProvider>
   );
 };
 
 export default RootLayout;
-
-const styles = StyleSheet.create({});

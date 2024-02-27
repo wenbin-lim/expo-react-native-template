@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "expo-router";
+import { Redirect, Stack } from "expo-router";
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 
 import {
@@ -9,25 +9,31 @@ import {
   SubmitErrorHandler,
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema, LoginProps } from "@src/api/auth";
+import { LoginSchema, LoginProps, login } from "@src/api/auth";
 
 import theme from "@src/theme";
-
-// Login page as entry
-const App = () => {
+import { useAuth } from "@src/providers/auth";
+const LoginScreen = () => {
+  const { isAuthenticated } = useAuth();
   const [errorMessage, setErrorMessage] = useState("");
+  const [loggingIn, setLoggingIn] = useState(false);
 
   const form = useForm<LoginProps>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
-      email: "test",
-      verificationCode: "",
+      username: "00000002",
+      password: "wenbin",
     },
   });
 
-  const onLogin: SubmitHandler<LoginProps> = ({ email, verificationCode }) => {
-    console.log("email", email);
-    console.log("verificationCode", verificationCode);
+  const onLogin: SubmitHandler<LoginProps> = async ({ username, password }) => {
+    try {
+      setLoggingIn(true);
+      await login({ username, password });
+      setLoggingIn(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onLoginError: SubmitErrorHandler<LoginProps> = (error) => {
@@ -44,6 +50,10 @@ const App = () => {
     }
   };
 
+  if (isAuthenticated) {
+    return <Redirect href="/" />;
+  }
+
   return (
     <View style={styles.container}>
       <Stack.Screen
@@ -52,11 +62,11 @@ const App = () => {
         }}
       />
 
-      <Text>Login here</Text>
+      <Text>Login Page</Text>
 
       <Controller
         control={form.control}
-        name="email"
+        name="username"
         render={({ field: { onChange, value } }) => (
           <TextInput
             style={styles.textInput}
@@ -68,7 +78,7 @@ const App = () => {
 
       <Controller
         control={form.control}
-        name="verificationCode"
+        name="password"
         render={({ field: { onChange, value } }) => (
           <TextInput
             style={styles.textInput}
@@ -80,6 +90,7 @@ const App = () => {
 
       <Button
         title="Login"
+        disabled={loggingIn}
         onPress={() => {
           // reset error message
           setErrorMessage("");
@@ -92,7 +103,7 @@ const App = () => {
   );
 };
 
-export default App;
+export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {

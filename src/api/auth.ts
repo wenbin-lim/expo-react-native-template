@@ -1,18 +1,25 @@
 import { z } from "zod";
+import backend from "./backend";
+
+export const USER_KEY = "users";
 
 // login user
 export const LoginSchema = z.object({
-  email: z.string().email("Invalid email"),
-  verificationCode: z.string().min(1, "Please enter a valid verification code"),
+  username: z.string().min(1, "Please enter a valid username"),
+  password: z.string().min(1, "Please enter a valid password"),
 });
 
 export type LoginProps = z.infer<typeof LoginSchema>;
 
-export const login = async ({ email, verificationCode }: LoginProps) => {
+export const login = async ({ username, password }: LoginProps) => {
   try {
-    console.log("email", email);
-    console.log("verificationCode", verificationCode);
+    const data = await backend
+      .collection(USER_KEY)
+      .authWithPassword(username, password);
+
+    return data;
   } catch (error) {
-    throw "Invalid lei";
+    console.log("Error logging in", error);
+    throw error;
   }
 };
