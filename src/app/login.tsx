@@ -51,7 +51,7 @@ const LoginScreen = () => {
   };
 
   if (isAuthenticated) {
-    return <Redirect href="/" />;
+    return <Redirect href="/privileges" />;
   }
 
   return (

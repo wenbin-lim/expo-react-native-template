@@ -1,8 +1,9 @@
-import { Stack, Redirect } from "expo-router";
+import { Redirect, Tabs } from "expo-router";
 import { StyleSheet, View, ActivityIndicator } from "react-native";
 
 import { useAuth } from "@src/providers/auth";
 
+import { LogoutButton } from "@src/components";
 import theme from "@src/theme";
 
 const AppLayout = () => {
@@ -20,14 +21,30 @@ const AppLayout = () => {
     return <Redirect href="/login" />;
   } else {
     return (
-      <Stack
+      <Tabs
+        initialRouteName="/privileges"
         screenOptions={{
-          headerBackTitleVisible: false,
-          contentStyle: {
-            backgroundColor: theme.colors.background,
-          },
+          headerRight: () => <LogoutButton />,
         }}
-      />
+        sceneContainerStyle={{
+          backgroundColor: theme.colors.background,
+        }}
+      >
+        <Tabs.Screen
+          name="index"
+          options={{
+            href: "/",
+            title: "Privileges",
+          }}
+        />
+        <Tabs.Screen
+          name="membership-card"
+          options={{
+            href: "/membership-card",
+            title: "Card",
+          }}
+        />
+      </Tabs>
     );
   }
 };

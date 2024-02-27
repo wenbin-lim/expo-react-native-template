@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, StyleSheet } from "react-native";
 
 import { useAuth } from "@src/providers/auth";
 
@@ -8,10 +8,16 @@ const LogoutButton = () => {
   const { logout } = useAuth();
 
   return (
-    <TouchableOpacity onPress={logout}>
+    <TouchableOpacity style={styles.container} onPress={logout}>
       <Feather name="log-out" size={24} color="black" />
     </TouchableOpacity>
   );
 };
 
 export default LogoutButton;
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 12,
+  },
+});
