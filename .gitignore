@@ -38,7 +38,7 @@ yarn-error.*
 .env
 
 # eas
-# eas.json
+eas.json
 
 # build files
 *.aab
