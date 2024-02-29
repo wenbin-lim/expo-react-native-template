@@ -35,6 +35,7 @@ const LoginScreen = () => {
       setLoggingIn(false);
     } catch (error) {
       console.log("Error onLogin", error);
+      setLoggingIn(false);
     }
   };
 
