@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Redirect, Stack } from "expo-router";
-import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { TextInput } from "@src/components";
+import { Image } from "expo-image";
 
 import {
   useForm,
@@ -62,14 +64,14 @@ const LoginScreen = () => {
         }}
       />
 
-      <Text>Login Page</Text>
+      <Image source={require("assets/icon.png")} style={styles.logoImage} />
 
       <Controller
         control={form.control}
         name="username"
         render={({ field: { onChange, value } }) => (
           <TextInput
-            style={styles.textInput}
+            label="Membership ID"
             onChangeText={onChange}
             value={value}
           />
@@ -81,7 +83,7 @@ const LoginScreen = () => {
         name="password"
         render={({ field: { onChange, value } }) => (
           <TextInput
-            style={styles.textInput}
+            label="Username"
             onChangeText={onChange}
             value={value}
             secureTextEntry
@@ -89,15 +91,17 @@ const LoginScreen = () => {
         )}
       />
 
-      <Button
-        title="Login"
+      <TouchableOpacity
+        style={styles.loginButton}
         disabled={loggingIn}
         onPress={() => {
           // reset error message
           setErrorMessage("");
           form.handleSubmit(onLogin, onLoginError)();
         }}
-      />
+      >
+        <Text style={styles.loginButtonText}>Log in</Text>
+      </TouchableOpacity>
 
       <Text style={styles.errorMessage}>{errorMessage}</Text>
     </View>
@@ -112,13 +116,23 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: theme.padding.containerX,
-    rowGap: 16,
+    rowGap: 24,
   },
-  textInput: {
-    height: 40,
+  logoImage: {
+    width: 128,
+    height: 128,
+  },
+  loginButton: {
+    marginTop: 16,
+    backgroundColor: theme.colors.primary,
     width: "100%",
-    borderWidth: 1,
-    paddingHorizontal: 10,
+    paddingVertical: 12,
+    borderRadius: 999,
+  },
+  loginButtonText: {
+    color: theme.colors.primaryText,
+    textAlign: "center",
+    fontWeight: "bold",
   },
   errorMessage: {
     color: theme.colors.error,
