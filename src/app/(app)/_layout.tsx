@@ -22,7 +22,7 @@ const AppLayout = () => {
   } else {
     return (
       <Tabs
-        initialRouteName="/privileges"
+        initialRouteName="/membership-card"
         screenOptions={{
           headerRight: () => <LogoutButton />,
         }}
@@ -34,14 +34,14 @@ const AppLayout = () => {
           name="index"
           options={{
             href: "/",
-            title: "Privileges",
+            title: "Home",
           }}
         />
         <Tabs.Screen
-          name="membership-card"
+          name="benefits"
           options={{
-            href: "/membership-card",
-            title: "Card",
+            href: "/benefits",
+            title: "Benefits",
           }}
         />
       </Tabs>
