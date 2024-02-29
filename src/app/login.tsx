@@ -30,11 +30,13 @@ const LoginScreen = () => {
 
   const onLogin: SubmitHandler<LoginProps> = async ({ username, password }) => {
     try {
+      setErrorMessage("");
       setLoggingIn(true);
       await login({ username, password });
       setLoggingIn(false);
     } catch (error) {
       console.log("Error onLogin", error);
+      setErrorMessage("An error occurred. Please try again.");
       setLoggingIn(false);
     }
   };

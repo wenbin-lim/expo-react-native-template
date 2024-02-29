@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "expo-react-native",
-    "slug": "expo-react-native",
-    "scheme": "membershipapp",
+    "name": "Club Membership",
+    "slug": "club-membership-app",
+    "scheme": "clubmembershipapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
