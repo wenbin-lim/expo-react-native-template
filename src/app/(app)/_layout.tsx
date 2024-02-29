@@ -2,7 +2,8 @@ import { Redirect, Tabs } from "expo-router";
 import { StyleSheet, View, ActivityIndicator } from "react-native";
 
 import { useAuth } from "@src/providers/auth";
-
+import { Feather } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { LogoutButton } from "@src/components";
 import theme from "@src/theme";
 
@@ -25,16 +26,23 @@ const AppLayout = () => {
         initialRouteName="/membership-card"
         screenOptions={{
           headerRight: () => <LogoutButton />,
+          tabBarActiveTintColor: theme.colors.primary,
         }}
-        sceneContainerStyle={{
-          backgroundColor: theme.colors.background,
-        }}
+        sceneContainerStyle={
+          {
+            // backgroundColor: theme.colors.background,
+          }
+        }
       >
         <Tabs.Screen
           name="index"
           options={{
             href: "/",
             title: "Home",
+            headerTitle: "Member Card",
+            tabBarIcon: ({ color, size }) => (
+              <Feather name="user" size={24} color={color} />
+            ),
           }}
         />
         <Tabs.Screen
@@ -42,6 +50,13 @@ const AppLayout = () => {
           options={{
             href: "/benefits",
             title: "Benefits",
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="ticket-confirmation-outline"
+                size={24}
+                color={color}
+              />
+            ),
           }}
         />
       </Tabs>
