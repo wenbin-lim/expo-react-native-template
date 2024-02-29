@@ -23,8 +23,8 @@ const LoginScreen = () => {
   const form = useForm<LoginProps>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
-      username: "00000002",
-      password: "wenbin",
+      username: "",
+      password: "",
     },
   });
 
@@ -122,8 +122,8 @@ const styles = StyleSheet.create({
     rowGap: 24,
   },
   logoImage: {
-    width: 128,
-    height: 128,
+    width: 180,
+    height: 180,
   },
   loginButton: {
     marginTop: 16,

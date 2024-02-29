@@ -71,8 +71,8 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   logoImage: {
-    width: 100,
-    height: 100,
+    width: 180,
+    height: 180,
   },
   row: {
     width: "100%",

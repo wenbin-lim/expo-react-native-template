@@ -18,7 +18,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.wenbin.lim.exporeactnative"
@@ -33,7 +33,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "84608e9a-b31b-4cc3-b421-2864263241b6"
+        "projectId": "ccc20b8a-5348-41ec-b3cc-b1363ded9e92"
       }
     }
   }
