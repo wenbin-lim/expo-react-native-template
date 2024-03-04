@@ -43,11 +43,6 @@ const MembershipCard = () => {
             {formatDateToString(user?.expire)}
           </Text>
         </View>
-
-        <View style={styles.row}>
-          <Text style={styles.rowKey}>Membership Points</Text>
-          <Text style={styles.rowValue}>{JSON.stringify(user?.points)}</Text>
-        </View>
       </View>
     </ScrollView>
   );

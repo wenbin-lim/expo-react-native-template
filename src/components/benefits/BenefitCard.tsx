@@ -52,7 +52,6 @@ const BenefitCard = ({ privilege }: Props) => {
           <Text style={styles.cardContentText}>
             {privilege.short_description}
           </Text>
-          <Text style={styles.cardContentText}>{privilege.points} Points</Text>
           <Text style={styles.cardContentDates}>
             {formatDateToString(privilege.start_date)} to{" "}
             {formatDateToString(privilege.end_date)}

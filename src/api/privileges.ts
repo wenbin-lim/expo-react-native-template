@@ -9,7 +9,6 @@ export type Privilege = {
   short_description: string;
   long_description: string;
   image: string;
-  points: number;
   start_date: string;
   end_date: string;
 };
